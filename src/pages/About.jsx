@@ -6,7 +6,6 @@ import AboutStep from '../Components/AboutStep'
 import AboutFaq from '../Components/AboutFaq'
 import AboutDiscover from '../Components/AboutDiscover'
 import AboutQuote from '../Components/AboutQuote'
-import PartnerForm from '../Components/PartnerForm'
 const About = () => {
   return (
     <div>
@@ -16,7 +15,6 @@ const About = () => {
           <AboutFaq />
           <AboutDiscover />
           <AboutQuote />
-          <PartnerForm />
           <AboutWork />
     </div>
   )
