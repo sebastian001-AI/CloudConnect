@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Layout from './layout/Layout';
 import Home from './pages/Home';
 import JobListing from './pages/JobListing';
@@ -17,7 +17,7 @@ const PrivateRoute = ({ children }) => {
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <AuthProvider>
         <ToastContainer />
         <Routes>
@@ -37,7 +37,7 @@ const App = () => {
           <Route path="/signup" element={<SignupForm />} />
         </Routes>
       </AuthProvider>
-    </BrowserRouter>
+    </Router>
   );
 };
 
