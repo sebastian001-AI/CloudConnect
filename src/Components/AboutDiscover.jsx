@@ -15,9 +15,11 @@ const AboutDiscover = () => {
             Verify your skills, learn brand new ones, and test your ability with 
             <span className="text-black font-semibold"> Pathways</span>, our learning and development platform.
           </p>
+          <a href="https://www.iu.org/blog/study-guides/most-in-demand-it-skills/" target="_blank" rel="noopener noreferrer">
           <button className="border-2 border-black px-8 py-3 font-medium hover:bg-black hover:text-white transition-all duration-300">
             Get started
           </button>
+          </a>
         </div>
 
         {/* Image */}

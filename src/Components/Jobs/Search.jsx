@@ -2,7 +2,7 @@ import React from 'react'
 
 function Search() {
   return (
-    <section className="w-full py-16 bg-gradient-to-r from-blue-400 to-blue-300">
+    <section className="w-full py-28 bg-gradient-to-r from-sky-400 to-blue-500">
     <div className="max-w-6xl mx-auto text-center mb-12">
       <h1 className="text-5xl font-extrabold text-gray-900">CloudConnect.</h1>
       <p className="mt-4 text-lg text-gray-800 leading-relaxed">

@@ -5,7 +5,6 @@ import { MdWorkOutline } from 'react-icons/md';
 import { motion } from 'framer-motion';
 import techman from '../assets/techman.png';
 
-// ✅ Reusable Animated Badge Component
 const Badge = ({ icon, text, className, delay }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -20,10 +19,9 @@ const Badge = ({ icon, text, className, delay }) => (
 
 const Know = () => {
   return (
-    <section className="py-16">
+    <section className="py-28">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
 
-        {/* Text Content */}
         <div>
           <h1 className="text-4xl lg:text-5xl font-extrabold leading-tight text-black mb-6">
             We Know What <span className="text-cyan-600">Tech Professionals</span> Want,<br />
@@ -34,7 +32,6 @@ const Know = () => {
           </p>
         </div>
 
-        {/* Image + Animated Badges */}
         <div className="relative flex justify-center">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -49,7 +46,6 @@ const Know = () => {
             />
           </motion.div>
 
-          {/* ✅ Using Animated Badge */}
           <Badge
             icon={<MdWorkOutline className="text-blue-600" />}
             text="Hybrid Workplace"

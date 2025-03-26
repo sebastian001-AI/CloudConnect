@@ -15,7 +15,7 @@ const PartnerForm = () => {
   const [successModal, setSuccessModal] = useState(false);
   const [failureModal, setFailureModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [redirectUrl, setRedirectUrl] = useState('https://your-redirect-url.com'); // Set your redirect URL here
+  const [redirectUrl, setRedirectUrl] = useState('http://localhost:5173/jobs'); // Replace with your actual URL
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,35 +29,52 @@ const PartnerForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Expanded validation
-    if (Object.values(formData).some((val) => val.trim() === '')) {
-      setError('Please fill out all fields.');
+    if (!formData.email.trim()) {
+      setError('Email is required.');
       setFailureModal(true);
       return;
     }
-
     if (!validateEmail(formData.email)) {
       setError('Invalid email address.');
+      setFailureModal(true);
+      return;
+    }
+    if (!formData.firstName.trim()) {
+      setError('First Name is required.');
+      setFailureModal(true);
+      return;
+    }
+    if (!formData.lastName.trim()) {
+      setError('Last Name is required.');
+      setFailureModal(true);
+      return;
+    }
+    if (!formData.company.trim()) {
+      setError('Company is required.');
+      setFailureModal(true);
+      return;
+    }
+    if (!formData.roles.trim()) {
+      setError('Please select the number of roles.');
       setFailureModal(true);
       return;
     }
 
     setLoading(true);
     try {
-      await sendMagicLink({ email: formData.email, redirectUrl }); // Pass email and redirectUrl as an object
+      await sendMagicLink({ email: formData.email, redirectUrl });
       console.log(`✅ Email sent to ${formData.email}`);
       setSuccessModal(true);
       setFormData({ email: '', firstName: '', lastName: '', company: '', roles: '' });
     } catch (error) {
-      console.error('❌ Failed to send email:', error.message);
-      setError('Failed to send email. Try again.');
+      console.error('❌ Failed to send email:', error);
+      setError(error.message || 'Failed to send email. Try again.');
       setFailureModal(true);
     } finally {
       setLoading(false);
     }
-  }; 
+  };
 
-  // Auto-close success modal after 5 seconds
   useEffect(() => {
     if (successModal) {
       const timer = setTimeout(() => setSuccessModal(false), 5000);
@@ -69,7 +86,7 @@ const PartnerForm = () => {
     <section className="relative bg-[#101c4b5d] py-16 px-4 md:px-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 opacity-10">
-        <img src={bgabout} alt="Background" className="w-full h-full object-cover" />
+        <img src={bgabout} alt="Decorative background" className="w-full h-full object-cover" aria-hidden="true" />
       </div>
       <div className="absolute inset-0 bg-[#b2bdd849] bg-opacity-70"></div>
 
@@ -130,7 +147,9 @@ const PartnerForm = () => {
             className="w-full border border-gray-300 rounded-md p-4"
             required
           >
-            <option value="">Please Make a Selection</option>
+            <option value="" disabled>
+              Select the number of roles
+            </option>
             <option>1-5 Roles</option>
             <option>6-10 Roles</option>
             <option>11+ Roles</option>
@@ -143,7 +162,7 @@ const PartnerForm = () => {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full ${loading ? 'bg-blue-400' : 'bg-blue-700 hover:bg-blue-800'} text-white font-semibold py-4 rounded-md transition duration-300`}
+            className={`w-full ${loading ? 'bg-blue-400' : 'bg-blue-700 hover:bg-blue-800'} text-white font-semibold py-4 rounded-md transition duration-300 flex items-center justify-center`}
           >
             {loading ? 'Submitting...' : 'Submit'}
           </button>
