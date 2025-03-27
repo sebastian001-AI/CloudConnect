@@ -30,13 +30,10 @@ const JobListing = () => {
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
 
-  // Get jobs for the current page
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
 
-  // Total number of pages
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
-  // Change page when a dot or page number is clicked
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (

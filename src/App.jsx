@@ -9,10 +9,17 @@ import SignupForm from './pages/SignupForm';
 import { ToastContainer } from 'react-toastify';
 import { AuthProvider, AuthContext } from './Context/AuthContext';
 import Error from './pages/Error';
+
 // PrivateRoute Component
 const PrivateRoute = ({ children }) => {
   const { user } = React.useContext(AuthContext);
-  return user ? children : <Navigate to="/signin" />;
+
+  if (user === undefined) {
+    // Optionally, you can add a loading state here if user is undefined
+    return null; // Or a loading spinner
+  }
+
+  return user ? children : <Navigate to="/signup" replace />;
 };
 
 const App = () => {
@@ -36,7 +43,6 @@ const App = () => {
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/signup" element={<SignupForm />} />
           <Route path="*" element={<Error />} />
-
         </Routes>
       </AuthProvider>
     </Router>
