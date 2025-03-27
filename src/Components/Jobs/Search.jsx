@@ -1,69 +1,44 @@
-import React from 'react'
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 
-function Search() {
+function Search({ title, company, type, experience, location, skills, job_link, postedOn }) {
+  const currentDate = dayjs();
+  const diffInDays = currentDate.diff(postedOn, 'week');
+
   return (
-    <section className="w-full py-28 bg-gradient-to-r from-sky-400 to-blue-500">
-    <div className="max-w-6xl mx-auto text-center mb-12">
-      <h1 className="text-5xl font-extrabold text-gray-900">CloudConnect.</h1>
-      <p className="mt-4 text-lg text-gray-800 leading-relaxed">
-        Discover tech roles that match your skills and ambition. Filter your search and find your next big opportunity.
-      </p>
+    <div className="w-full px-4 gap-6">
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-center p-6 bg-zinc-200 border-black shadow-lg rounded-lg hover:border-blue-500  gap-4">
+    <div className="flex flex-col items-start ">
+      <h1 className="text-lg font-semibold">{title} - {company}</h1>
+      <p className="text-sm text-gray-600">{type} • {experience} • {location}</p>
+      <div className="flex flex-wrap gap-2">
+        {skills.map((skill) => (
+          <p key={skill} className="text-gray-500 py-1 px-3 rounded-md border border-black text-sm">{skill}</p>
+        ))}
+      </div>
     </div>
-  
-    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-4 px-6">
-      {/* Job Role */}
-      <select className="p-4 bg-white rounded-lg shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500">
-        <option value="">Job Role</option>
-        <option>iOS Developer</option>
-        <option>Frontend Developer</option>
-        <option>Backend Developer</option>
-        <option>Android Developer</option>
-        <option>Developer Advocate</option>
-        <option>Cloud Engineer</option>
-        <option>UI/UX Designer</option>
-      </select>
-  
-      {/* Job Type */}
-      <select className="p-4 bg-white rounded-lg shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500">
-        <option value="">Job Type</option>
-        <option>Fully Remote</option>
-        <option>Hybrid</option>
-        <option>On-Site</option>
-      </select>
-  
-      {/* Location */}
-      <select className="p-4 bg-white rounded-lg shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500">
-        <option value="">Location</option>
-        <option>USA</option>
-        <option>Canada</option>
-        <option>UK</option>
-        <option>Germany</option>
-        <option>Remote</option>
-      </select>
-  
-      {/* Experience */}
-      <select className="p-4 bg-white rounded-lg shadow-sm border border-gray-300 focus:ring-2 focus:ring-blue-500">
-        <option value="">Experience</option>
-        <option>Entry Level</option>
-        <option>Mid Level</option>
-        <option>Senior Level</option>
-      </select>
-  
-      {/* Search Button */}
-      <button className="p-4 bg-blue-700 hover:bg-blue-800 text-white font-semibold rounded-lg shadow-sm transition duration-300">
-        Search
-      </button>
+    <div className="flex flex-col md:flex-row items-center gap-4">
+      <p className="text-sm text-gray-500">Posted {diffInDays} days ago</p>
+      <a href={job_link}>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">Apply</button>
+      </a>
     </div>
-  
-    {/* Optional subtle CTA */}
-    <div className="max-w-6xl mx-auto text-center mt-10">
-      <p className="text-base text-gray-700">
-        Not seeing your role? <span className="underline cursor-pointer hover:text-blue-800">Submit your profile</span> and stay updated.
-      </p>
-    </div>
-  </section>
-  
-  )
+  </div>
+</div>
+
+  );
 }
 
-export default Search
+Search.propTypes = {
+  title: PropTypes.string.isRequired,
+  company: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  experience: PropTypes.string.isRequired,
+  location: PropTypes.string.isRequired,
+  skills: PropTypes.arrayOf(PropTypes.string).isRequired,
+  job_link: PropTypes.string.isRequired,
+  postedOn: PropTypes.string.isRequired,
+};
+
+export default memo(Search);

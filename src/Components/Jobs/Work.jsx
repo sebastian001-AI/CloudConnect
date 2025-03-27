@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaUserPlus, FaHandsHelping, FaIdCard, FaBriefcase } from 'react-icons/fa';
+
 const Work = () => {
   return (
     <section className="bg-[#76D1F9] py-16 px-4">
